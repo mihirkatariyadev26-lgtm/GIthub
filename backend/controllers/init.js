@@ -5,7 +5,7 @@ import { exec } from "node:child_process";
 export async function initRepo() {
   const system = os.platform(); //return the os
   const repoPath = path.resolve(process.cwd(), ".Arbor"); //it gives the current working directory/path (process.cwd() is give the current working directory )
-  const commitPath = path.join(repoPath, ".commits");
+  const commitPath = path.join(repoPath, "commits");
   console.log(`${system}`);
 
   if (system === "win32") {
