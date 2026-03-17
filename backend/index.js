@@ -1,4 +1,10 @@
 import "dotenv/config";
+import cors from "cors";
+import mongoose from "mongoose";
+import bodyParser from "body-parser";
+import http from "http";
+import express from "express";
+import { Server } from "socket.io";
 import yargs from "yargs"; //use for reading command from terminal
 import { hideBin } from "yargs/helpers"; //use for reading parameters of commands from terminal
 import { initRepo } from "./controllers/init.js";
@@ -7,7 +13,9 @@ import { pullRepo } from "./controllers/pull.js";
 import { commitRepo } from "./controllers/commit.js";
 import { pushRepo } from "./controllers/push.js";
 import { revertRepo } from "./controllers/revert.js";
-yargs(hideBin(process.argv)) //INIT COMMAND
+yargs(hideBin(process.argv))
+  .command("start", "start the server", {}, startServer)
+  //INIT COMMAND
   .command("init", "initalise a new repository", {}, initRepo) //ADD COMMAND
   .command(
     "add <file>",
@@ -52,3 +60,46 @@ yargs(hideBin(process.argv)) //INIT COMMAND
   )
   .demandCommand(1, "You need at least one command ")
   .help().argv; //args:command,description,commands parame1ters,config method/function
+
+async function startServer() {
+  const app = express();
+  const port = process.env.PORT || 3000;
+
+  app.use(bodyParser.json());
+  app.use(express.json());
+  const mongoUrl = process.env.MONGODB_URL;
+  mongoose
+    .connect(mongoUrl)
+    .then(() => console.log("DB connected successfully!!"))
+    .catch((e) => console.error("Error in DB connection!!", e));
+
+  app.use(cors({ origin: "*" }));
+
+  app.get("/", (req, res) => {
+    res.send("Welcome to Arbor");
+  });
+  const httpServer = http.createServer(app);
+  const io = new Server(httpServer, {
+    cors: {
+      origin: "*",
+      methodes: ["GET", "POST"],
+    },
+  });
+  io.on("connection", (soket) => {
+    soket.on("JoinRoom", (userID) => {
+      user = userID;
+      console.log("=========");
+      console.log(user);
+      console.log("=========");
+      soket.join(userID);
+    });
+  });
+  const db = mongoose.connection;
+  db.once("open", async () => {
+    console.log("CRUD opreation called");
+    //CRUD opreations
+  });
+  httpServer.listen(port, () => {
+    console.log(`Server is running on port :${port}`);
+  });
+}
