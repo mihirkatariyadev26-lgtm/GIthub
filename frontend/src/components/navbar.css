@@ -1,0 +1,79 @@
+.navbar-out {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+.navbar {
+  height: 10vh;
+  width: 95%;
+  padding: 1rem;
+  margin-top: 1rem;
+  /* margin-left: 2rem; */
+  /* border: 1px solid white; */
+  border-top-left-radius: 10vh;
+  border-bottom-left-radius: 10vh;
+  border-top-right-radius: 10vh;
+  border-bottom-right-radius: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.045);
+}
+.navbar:hover {
+  /* background-color : rgba(0, 255, 255, 0.192); */
+  box-shadow: 0 0vh 6vh rgba(18, 18, 184, 0.511);
+}
+.Logo {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  cursor: pointer;
+  border-radius: 2rem;
+  background-color: transparent;
+}
+.Name {
+  display: flex;
+  background-color: transparent;
+  font-size: 3rem;
+  color: aqua;
+  justify-content: center;
+  align-items: center;
+  text-shadow: 3px 4px 10px rgba(18, 18, 184, 0.805);
+}
+
+.logo {
+  display: flex;
+  /* border: 1px solid blue; */
+  justify-content: center;
+  height: 10vh;
+  border-radius: 50%;
+  width: 10vh;
+  background-image: url("/ICON.PNG");
+  background-size: cover;
+}
+.option-group {
+  display: flex;
+  height: 100%;
+  background-color: transparent;
+  width: 30%;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.option {
+  background-color: transparent;
+  display: flex;
+  font-size: x-large;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  height: fit-content;
+  align-items: center;
+}
+.option:hover {
+  cursor: pointer;
+  background-color: 10px 20px 10px #1212b8d6;
+  box-shadow:
+    0 0 10px #1212b8d6,
+    0 0 20px #1212b8d6,
+    0 0 40px #1212b8d6;
+}

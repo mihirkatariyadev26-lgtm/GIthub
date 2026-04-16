@@ -1,0 +1,9 @@
+import express from "express";
+import { UserController } from "../controllers/user.controller.js";
+export const userRouter = express.Router();
+userRouter.get("/allUsers", UserController.getAllUser);
+userRouter.post("/signup", UserController.signup);
+userRouter.post("/login", UserController.login);
+userRouter.get("/getUserProfile/:id", UserController.getUserProfile);
+userRouter.put("/updateProfile/:id", UserController.updateProfile);
+userRouter.delete("/deleteUserProfile/:id", UserController.deleteUserProfile);

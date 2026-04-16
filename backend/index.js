@@ -1,3 +1,6 @@
+import dns from "node:dns";
+dns.setDefaultResultOrder("ipv4first");
+dns.setServers(["8.8.8.8", "1.1.1.1"]);
 import "dotenv/config";
 import cors from "cors";
 import mongoose from "mongoose";
@@ -13,6 +16,7 @@ import { pullRepo } from "./controllers/pull.js";
 import { commitRepo } from "./controllers/commit.js";
 import { pushRepo } from "./controllers/push.js";
 import { revertRepo } from "./controllers/revert.js";
+import { mainRouter } from "./routes/main.route.js";
 yargs(hideBin(process.argv))
   .command("start", "start the server", {}, startServer)
   //INIT COMMAND
@@ -69,15 +73,14 @@ async function startServer() {
   app.use(express.json());
   const mongoUrl = process.env.MONGODB_URL;
   mongoose
-    .connect(mongoUrl)
+    .connect(mongoUrl, {
+      family: 4, // Forces IPv4
+    })
     .then(() => console.log("DB connected successfully!!"))
     .catch((e) => console.error("Error in DB connection!!", e));
 
   app.use(cors({ origin: "*" }));
-
-  app.get("/", (req, res) => {
-    res.send("Welcome to Arbor");
-  });
+  app.use("/", mainRouter);
   const httpServer = http.createServer(app);
   const io = new Server(httpServer, {
     cors: {
