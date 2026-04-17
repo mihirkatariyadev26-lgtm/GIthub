@@ -12,17 +12,18 @@ const ProjectRoutes = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
     const userIdFromStorage = localStorage.getItem("userId");
     if (userIdFromStorage && !currentUser) {
       setCurrentUser(userIdFromStorage);
     }
     if (
-      !userIdFromStorage &&
+      !token &&
       !["/auth", "/signup", "/"].includes(window.location.pathname)
     ) {
       navigate("/auth");
     }
-    if (userIdFromStorage && window.location.pathname === "/auth") {
+    if (token && window.location.pathname === "/auth") {
       navigate("/");
     }
   }, [currentUser, navigate, setCurrentUser]);

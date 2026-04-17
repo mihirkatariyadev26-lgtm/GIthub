@@ -1,11 +1,38 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Navbar from "../navbar";
 import "./Login.css";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useAuth } from "../../authContext";
+import axios from "axios";
 function Login() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { currentUser, setCurrentUser } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const res = await axios.post("http://localhost:3000/login", {
+        password: password,
+        email: email,
+      });
+      const token = res.data.token;
+      const userId = res.data.userId;
+      localStorage.setItem("token", token);
+      localStorage.setItem("userId", userId);
+      setCurrentUser(userId);
+      setLoading(false);
+      navigate("/dashboard");
+    } catch (error) {
+      console.error(error);
+      alert("Login is failed");
+      setLoading(false);
+    }
+  };
   return (
     <>
       <div className="auth">
@@ -14,26 +41,42 @@ function Login() {
           <Box className="form">
             <h2>Login</h2>
             <div className="field">
-              <TextField id="filled-basic" label="Username" variant="filled" />
+              <TextField
+                id="filled-basic"
+                label="Email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+                variant="filled"
+              />
             </div>
             <div className="field">
-              <TextField id="filled-basic" label="Password" variant="filled" />
+              <TextField
+                id="filled-basic"
+                type="password"
+                label="Password"
+                variant="filled"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
             </div>
-            <div className="btn" type="button">
-              Login
+            <div
+              className="btn"
+              type="button"
+              onClick={handleLogin}
+              disabled={loading}>
+              {loading ? "Loading..." : "Login"}
             </div>
             <p>
-              Do You want to Create an accout ?
-              <span
-                onClick={() => {
-                  navigate("/signup");
-                }}>
-                SignUp
-              </span>
+              Do You want to Create an account ?<span>SignUp</span>
             </p>
           </Box>
         </div>
       </div>
+      <script src="../dashboard/Dashboard.jsx" rel="preload"></script>
     </>
   );
 }

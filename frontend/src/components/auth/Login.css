@@ -17,15 +17,14 @@
   justify-content: center;
   flex-wrap: wrap;
   display: inline;
-  height: fit-content;
+  height: 50%;
   width: 30%;
   padding: 2rem;
   border-radius: 2rem;
   background-color: rgba(255, 252, 252, 0.037);
   box-shadow:
-    0 0 2rem #1212b8d6,
-    0 0 2rem #1212b8d6,
-    0 0 2rem #1212b8d6;
+    0 0 10px #1212b8d6,
+    0 0 30px #7878d1d6;
 }
 .form h2 {
   display: flex;
@@ -58,13 +57,12 @@
   border-radius: 1rem;
   /* border: 1px solid blue; */
   padding: 0.75rem;
-  background-color: rgba(48, 1, 45, 0.955);
+  background-color: rgba(0, 0, 0, 0.955);
 }
 .btn:hover {
   box-shadow:
-    0 0 10px #1212b8d6,
-    0 0 20px #1212b8d6,
-    0 0 40px #1212b8d6;
+    0 0 0px #1212b8d6,
+    0 0 50px #1212b8d6;
 }
 
 .form p {
