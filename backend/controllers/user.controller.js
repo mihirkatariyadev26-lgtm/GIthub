@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { User } from "../models/usermodel.js";
 import mongoose from "mongoose";
+
 const signup = async (req, res) => {
   const { username, password, email } = req.body;
   try {
@@ -12,7 +13,7 @@ const signup = async (req, res) => {
     }
     const salt = await bcrypt.genSalt(10);
     const hashedpassword = await bcrypt.hash(password, salt);
-    
+
     const newUser = new User({
       username,
       password: hashedpassword,
@@ -23,12 +24,10 @@ const signup = async (req, res) => {
     });
 
     const result = await newUser.save();
-    const token = jwt.sign(
-      { id: result._id },
-      process.env.JWT_SECREAT_KEY,
-      { expiresIn: "72hr" },
-    );
-    res.json(token);
+    const token = jwt.sign({ id: result._id }, process.env.JWT_SECREAT_KEY, {
+      expiresIn: "72hr",
+    });
+    res.json({ token, userId: result.insertid });
   } catch (e) {
     console.error("Error during signup", e.message);
     res.status(500).send({ message: "server error" });
@@ -89,7 +88,7 @@ const updateProfile = async (req, res) => {
     const result = await User.findByIdAndUpdate(
       userID,
       { $set: updateFields },
-      { new: true }
+      { new: true },
     );
     if (!result) {
       return res.status(404).json({ message: "user not found" });
