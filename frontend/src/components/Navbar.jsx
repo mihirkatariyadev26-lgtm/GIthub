@@ -10,7 +10,9 @@ function Navbar() {
   }, []);
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
     setIsLogedin(false);
+    navigate("/");
   };
   return (
     <>
@@ -48,7 +50,15 @@ function Navbar() {
               </>
             )}
 
-            <div className="option ">Get Started</div>
+            <div
+              className="option"
+              onClick={() => {
+                localStorage.getItem("token")
+                  ? navigate("/dashboard")
+                  : navigate("/auth");
+              }}>
+              Get Started
+            </div>
           </div>
         </div>
       </div>

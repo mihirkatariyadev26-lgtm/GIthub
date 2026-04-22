@@ -13,6 +13,13 @@ export const AuthProvider = ({ children }) => {
       setCurrentUser(userId);
     }
   }, []);
-  const value = { currentUser, setCurrentUser };
+
+  const logout = () => {
+    setCurrentUser(null);
+    localStorage.removeItem("userId");
+    localStorage.removeItem("token");
+  };
+
+  const value = { currentUser, setCurrentUser, logout };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

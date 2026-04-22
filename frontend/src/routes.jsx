@@ -6,6 +6,7 @@ import Login from "./components/auth/Login.jsx";
 import Signup from "./components/auth/Signup.jsx";
 import Dashboard from "./components/dashboard/Dashboard.jsx";
 import Profile from "./components/user/Profile.jsx";
+import CreateRepo from "./components/repository/CreateRepo.jsx";
 
 const ProjectRoutes = () => {
   const { currentUser, setCurrentUser } = useAuth();
@@ -33,6 +34,7 @@ const ProjectRoutes = () => {
     { path: "/auth", element: <Login /> },
     { path: "/signup", element: <Signup /> },
     { path: "/dashboard", element: <Dashboard /> },
+    {path:"/RepoForm",element:<CreateRepo/>},
     { path: "/profile", element: <Profile /> },
   ]);
   return element;

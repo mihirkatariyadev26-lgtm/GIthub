@@ -1,0 +1,109 @@
+.Dashboard {
+  height: 100vh;
+  width: 100vw;
+}
+.grid {
+  display: grid;
+  /* border: 1px; */
+  height: 80vh;
+  width: 98%;
+  display: flex;
+  box-shadow: 0 0vh 2vh rgba(18, 18, 184, 0.511);
+  border-radius: 5vh;
+}
+.nav {
+  height: 5vh;
+  box-shadow: 0 0vh 2vh rgba(255, 255, 255, 0.511);
+  background-color: rgba(0, 0, 0, 0.366);
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  border-radius: 2rem;
+  padding: 0.5rem;
+  /* border: 1px solid red; */
+}
+.Nav {
+  /* border: 1px solid red; */
+  display: flex;
+  height: fit-content;
+  padding: 1.25rem;
+  width: 100%;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+}
+.profile {
+  width: fit-content;
+  height: 80%;
+  display: flex;
+}
+.main {
+  /* background-color: aliceblue; */
+  display: flex;
+  margin-top: 1rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: transparent;
+  flex-wrap: wrap;
+}
+
+.profile-icon {
+  border: 1px solid white;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-size: cover;
+  background-image: url("/Profile_1.png");
+}
+
+.username {
+  font-size: 1.25rem;
+  padding: 0.25rem;
+  background-color: transparent;
+}
+.profile {
+  padding: 0.5rem;
+
+  /* padding-inline: 1.25rem; */
+  align-items: center;
+  border-radius: 2rem;
+  border: 1px solid transparent;
+}
+.profile:hover {
+  /* background-color: rgba(0, 0, 0, 0.3); */
+  border: 1px solid rgba(255, 255, 255, 0.21);
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.123);
+}
+.options {
+  justify-content: space-between;
+  width: fit-content;
+  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+  display: flex;
+  /* border: 1px solid white; */
+  background-color: transparent;
+}
+.Option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid white; */
+  border-radius: 1rem;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  flex-wrap: wrap;
+  background-color: transparent;
+}
+.Option:hover {
+  background-color: forestgreen;
+  box-shadow: 2px 2px 2vh forestgreen;
+  cursor: pointer;
+}
+.Option p {
+  background-color: transparent;
+}
+.MuiSvgIcon-fontSizeMedium {
+  background-color: transparent;
+}

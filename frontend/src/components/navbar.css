@@ -22,7 +22,7 @@
 }
 .navbar:hover {
   /* background-color : rgba(0, 255, 255, 0.192); */
-  box-shadow: 0 0vh 6vh rgba(18, 18, 184, 0.511);
+  box-shadow: 0 0vh 1vh rgba(18, 18, 184, 0.511);
 }
 .Logo {
   display: flex;
